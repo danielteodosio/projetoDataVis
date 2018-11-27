@@ -25,7 +25,7 @@ function corrScatter(what){
         .attr('transform', 'translate(' + (w + pad) + ',0)');
 
     corrplot.append('text')
-        .text('Matrix de Correlação')
+        .text('Matriz de Correlação')
         .attr('class', 'plottitle')
         .attr('x', w/2)
         .attr('y', -marginCorr.top/2)
