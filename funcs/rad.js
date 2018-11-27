@@ -29,38 +29,38 @@ function radar(data_){
             let k = 100;
 
             tops.forEach(function(d){
-
+               console.log("chamando rad");
                console.log(d.name, scale1(+d.danceability));
             	
             	dataAxis = new Object();
 
-            	dataAxis.axis = "Dançabilidade";
+            	dataAxis.axis = "Danceability";
             	dataAxis.value = scale1(+d.danceability);
             	insideArray.push(dataAxis);
 
             	dataAxis = new Object();
                
-            	dataAxis.axis = "Energia";
+            	dataAxis.axis = "Energy";
             	dataAxis.value = scale1(+d.energy);
             	insideArray.push(dataAxis);
 
             	dataAxis = new Object();
             	
-            	dataAxis.axis = "Sonoridade";
+            	dataAxis.axis = "Loudness";
             	dataAxis.value = scale2(+d.loudness);
             	insideArray.push(dataAxis);
 
 
             	dataAxis = new Object();
 
-            	dataAxis.axis = "Acústica";
+            	dataAxis.axis = "Acousticness";
             	dataAxis.value = scale1(+d.acousticness);
             	insideArray.push(dataAxis);
 
 
             	dataAxis = new Object();
 
-            	dataAxis.axis = "Valencia";
+            	dataAxis.axis = "Valence";
             	dataAxis.value = scale1(+d.valence);
             	insideArray.push(dataAxis);
 

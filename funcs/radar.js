@@ -6,6 +6,7 @@
 /////////////////////////////////////////////////////////
 
 function RadarChart(id, control, data) {
+    console.log("chamando radar")
     var nMusicLines = 0;
     var dataToPlot = [];
     var cfg = {
@@ -32,6 +33,9 @@ function RadarChart(id, control, data) {
     // }
 
     //If the supplied maxValue is smaller than the actual one, replace by the max in the data
+
+    var controlValue = document.getElementById("control").value;
+
     var maxValue = Math.max(cfg.maxValue, d3.max(data, function(i){return d3.max(i.map(function(o){return o.value;}))}));
 
     var allAxis = (data[0].map(function(i, j){return i.axis})),	//Names of each axis
@@ -138,6 +142,41 @@ function RadarChart(id, control, data) {
         .data(dataToPlot)
         .enter().append("g")
         .attr("class", "radarWrapper");
+
+
+        console.log("valor do control:");
+        console.log(document.getElementById("control").value);
+
+
+        if(controlValue > 0){
+                     nMusicLines = controlValue;
+                    console.log(nMusicLines);
+                    dataToPlot = [];
+                    for(i=0; i<nMusicLines; i++){
+                        dataToPlot[i] = data[i];
+                    };
+
+                    console.log(dataToPlot);
+
+                    blobWrapper = g.selectAll(".radarWrapper")
+                        .data(dataToPlot)
+                        .exit()
+                        .remove();
+
+                    blobWrapper = g.selectAll(".radarWrapper")
+                        .data(dataToPlot)
+                        .enter().append("g")
+                        .attr("class", "radarWrapper");
+
+                    blobWrapper.append("path")
+                        .attr("class", "radarStroke")
+                        .attr("d", function(d,i) { return radarLine(d); })
+                        .style("stroke-width", cfg.strokeWidth + "px")
+                        .style("stroke", function(d,i) {console.log(0.1+((99-i)/110));return '#1db954'; })
+                        .style("fill", "none")
+                        .style("filter" , "url(#glow)");
+
+        }
 
     //Append the backgrounds
 

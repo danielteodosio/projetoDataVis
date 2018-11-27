@@ -144,6 +144,7 @@ function corrScatter(what){
 
     corrplot.selectAll('g.cell')
         .on('mouseover', function(d) {
+            console.log("mouseover");
             d3.select(this)
                 .select('rect')
                 .attr('stroke', 'black');
@@ -177,7 +178,8 @@ function corrScatter(what){
                 .attr('width', 40)
                 .attr('height', 20)
                 .attr('fill', 'rgba(200, 200, 200, 0.5)')
-                .attr('stroke', 'black');
+                .attr('stroke', 'black')
+                .attr('data-toggle', 'tooltip');
 
 
             corrplot.append('text')
@@ -201,6 +203,8 @@ function corrScatter(what){
             d3.selectAll('.tooltip').remove();
         }).on('click', function(d) {
         drawScatter(d.col, d.row);
+        radar(data);
+        dc.renderAll();
     });
 
 }//
