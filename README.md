@@ -10,7 +10,7 @@
 
 <h5>Descrição das pastas:</h5> <br>
 css: Páginas de estilo <br>
-scss: ... <br>
+scss: Páginas de estilo <br>
 data: Dados em formato csv usados pela página de visualizações. <br>
-funcs: Funções javascript responsáveis pelo plot do radar-chart e da matriz de correlação. As funções foram colocadas em separado para fins de organização.
-
+funcs: Funções javascript responsáveis pelo plot do radar-chart e da matriz de correlação. As funções foram colocadas em separado para fins de organização.<br>
+As demais pastas: material relacionado ao layout da página
