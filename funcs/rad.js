@@ -34,33 +34,33 @@ function radar(data_){
             	
             	dataAxis = new Object();
 
-            	dataAxis.axis = "Danceability";
+            	dataAxis.axis = "Dançabilidade";
             	dataAxis.value = scale1(+d.danceability);
             	insideArray.push(dataAxis);
 
             	dataAxis = new Object();
                
-            	dataAxis.axis = "Energy";
+            	dataAxis.axis = "Energia";
             	dataAxis.value = scale1(+d.energy);
             	insideArray.push(dataAxis);
 
             	dataAxis = new Object();
             	
-            	dataAxis.axis = "Loudness";
+            	dataAxis.axis = "Sonoridade";
             	dataAxis.value = scale2(+d.loudness);
             	insideArray.push(dataAxis);
 
 
             	dataAxis = new Object();
 
-            	dataAxis.axis = "Acousticness";
+            	dataAxis.axis = "Acústica";
             	dataAxis.value = scale1(+d.acousticness);
             	insideArray.push(dataAxis);
 
 
             	dataAxis = new Object();
 
-            	dataAxis.axis = "Valence";
+            	dataAxis.axis = "Valencia";
             	dataAxis.value = scale1(+d.valence);
             	insideArray.push(dataAxis);
 

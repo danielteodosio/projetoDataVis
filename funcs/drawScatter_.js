@@ -1,4 +1,4 @@
-function drawScatter(tableValues, col, row) {
+var drawScatter = function(col, row) {
             //console.log('column ' + col + ', row ' + row);
             let colValues = [];
             let rowValues = [];
@@ -72,7 +72,7 @@ function drawScatter(tableValues, col, row) {
                 .text(vars[col])
                 .attr('class', 'scatterlabel')
                 .attr('x', w/2)
-                .attr('y', h + margin.bottom/2)
+                .attr('y', h + marginCorr.bottom/2)
                 .attr('text-anchor', 'middle')
                 .attr('dominant-baseline', 'middle');
 
@@ -90,4 +90,6 @@ function drawScatter(tableValues, col, row) {
                 //     'text-anchor': 'middle'
                 // });
 
+        
+                dc.renderAll();
         }
