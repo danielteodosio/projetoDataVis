@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+
+
+  #simp {
+    float: left;
+    margin-bottom: 100px;
+    margin-top: 100px;
+  }
+  #corr-hist {
+    float: left;
+  }
+
+  #energy {
+    float: left;
+  }
+  #loudness {
+    float: left;
+  }
+  #acustica {
+    float: left;
+  }
+  #valence {
+    float: left;
+  }
+  #corr-his {
+    float: left;
+    margin-bottom: 100px;
+    margin-top: 100px;
+  }
+  #radarArea {
+    float: left;
+    margin-bottom: 100px;
+    margin-top: 100px;
+  }
+
+  #musicgenre-chart{
+    float: left;
+    margin-bottom: 100px;
+    margin-top: 100px;
+  }
+
+  #artistgender-chart{
+    float: left;
+    margin-bottom: 100px;
+    margin-top: 100px;
+  }
+
+  #bandtype-chart{
+    float: left;
+    margin-bottom: 100px;
+    margin-top: 100px;
+  }
+
+
+  #blockid-text{
+    float: left;
+    margin-bottom: 30px;
+    margin-top: 30px;
+
+  }
+
+  #header{
+
+    margin-top: 0px;
+    margin-bottom: 30px;
+    background-color: #5F9EA0;
+    height: 300px;
+  }
+
+  #text-header{
+
+    padding-top: 40px;
+    margin-left: 50px;
+    background-color: #5F9EA0;
+    height: 200px;
+  }
+
+
+  #radarArea{
+
+    margin-left: 100px;
+
+  }
+
+  #control{
+
+    margin-left: 55px;
+
+  }
+
+
+
+  #all{
+    margin-left: 200px;
+    margin-right: 200px;
+  }
+
+
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: none;
+    shape-rendering: crispEdges;
+  }
+
+
+
+  .axis text {
+    font-family: sans-serif;
+    font-size: 12px;
+  }
+
+  #musicgenre-chart .x.axis text {
+    text-anchor: end !important;
+    transform: rotate(-15deg);
+
+
+  }
+
+
+  .legend {
+    font-family: 'Raleway', sans-serif;
+    fill: #333333;
+  }
+
+
+  input[type="range"]{
+    width:500px;
+  }
+
+</style>
+  <head>
+
+    <link rel="stylesheet" type="text/css" href="projdatavis/projetoDataVis-master/vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="projdatavis/projetoDataVis-master/vendor/bootstrap/css/bootstrap.css"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Spotify 2017</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/one-page-wonder.min.css" rel="stylesheet">
+    <!-- Scripts -->
+    <link rel="stylesheet" href="css/dc.min.css">
+    <!--<link rel="stylesheet" href="css/styles.css">-->
+    <script src="js/crossfilter.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="js/dc.min.js"></script>
+  </head> <!--Não tem mais o que mexer aqui-->
+
+  <body>
+	<header class="masthead text-center text-white">
+      <div class="masthead-content">
+        <div class="container">
+          <h1 class="masthead-heading mb-0">Spotify 2017</h1>
+          <h2 class="masthead-subheading mb-0">Uma análise exploratória</h2>
+          <a href="#sec1" class="btn btn-primary btn-xl rounded-pill mt-5">Leia Mais</a>
+        </div>
+      </div>
+      <div class="bg-circle-1 bg-circle"></div>
+      <div class="bg-circle-2 bg-circle"></div>
+      <div class="bg-circle-3 bg-circle"></div>
+      <div class="bg-circle-4 bg-circle"></div>
+    </header>
+    <section>
+      <div id='sec1' class="container">
+        <div class="row align-items-center">
+        </div>
+        <div class="text-center">
+          <div class="p-5">
+            <h2 class="display-4">Sobre do que se trata essa página?</h2>
+            <p>Este é o Trabalho final da disciplina de Visualização de dados 2018.2 feito por <b>Luis Soares</b> e <b>Daniel Teodósio</b>. Onde foram utilizados as bibliotecas de visualização de dados <b>D3.js</b> e <b>DC.js</b> para a realização de uma análise exploratória das top 100 músicas mais escutadas no Spotify em 2017, onde o mesmo fornece uma API pra extração das bases de dados.</p>
+          </div>
+        </div>
+      </div>
+    </section>  <!-- Sessão inicial-->
+    <section>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="text-center">
+            <div class="p-5">
+              <h2 class="display-4">Distribuição por gênero musical</h2>
+              <p>Primeiramente, foi feito uma análise sobre quais os gêneros músicas se destacaram no ano. O gráfico ao lado mostra a distribuição por gênero musical das 100 músicas mais escutadas no ano de de 2017 segundo o Spotify.</p>
+            </div>
+          </div>
+          <div class="align-content-center">
+            <div id='musicgenre-chart' class="p-5">
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>  <!-- Sessão Distribuição Genero Musical-->
+    <section>
+
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 order-lg-2">
+            <div class="p-5">
+              <img class="img-fluid rounded-circle" src="img/03.jpg" alt="">
+            </div>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="p-5">
+              <h2 class="display-4">Quais foram as distribuições por sexo? e tipo de banda?</h2>
+              <p>A seguir, temos uma distribuição em porcentagem por sexo e tipo de banda.</p>
+            </div>
+          </div>
+        </div>
+        <div class= "row align-content-center">
+          <div class="col-lg-6 order-lg-1">
+            <div id='artistgender-chart'></div>
+          </div>
+          <div class="col-lg-6 order-lg-2">
+            <div id='bandtype-chart'></div>
+          </div>
+        </div>
+      </div>
+    </section> <!-- Sessão distribuição sexo e tipo de banda-->
+    <section>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="p-5">
+              <img class="img-fluid rounded-circle" src="img/02.jpg" alt="">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="p-5">
+              <h2 class="display-4">Quais as caracteristicas mais importantes?</h2>
+              <p>O Spotify por meio de sua API, fornece caracteristicas das músicas, como Dançabilidade, Sonoridade, Energia, Acústica e Valência.</p>
+            </div>
+          </div>
+
+          <svg id = "corr-hist" class="center"></svg>
+          <!--Carregamento do Gráfico de radar-->
+            <div id = "radarArea">
+                <div><input id="control" type="range" value="0" min="0" max="100" width="1000"/></div>
+                <br>
+                <h3 id="nmusicas" align="center">TOP 0 músicas</h3>
+                <br>
+                <div class="radarChart"></div>
+            </div>
+
+        </div>
+      </div>
+    </section> <!-- Sessão Análise das Caracteristicas PT1-->
+    <section>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 order-lg-2">
+            <div class="p-5">
+              <img class="img-fluid rounded-circle" src="img/03.jpg" alt="">
+            </div>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="p-5">
+              <h2 class="display-4">Uma análise aprofundada sobre as caracteristicas</h2>
+              <p>A seguir temos uma análise mais detalhada de cada caracteristica por sua popularidade.</p>
+            </div>
+          </div>
+        </div>
+          <!--Dançabilidade-->
+        <div class= "row align-content-center">
+            <div class="col-lg-6 order-lg-1">
+              <div id='danceability-chart'></div>
+            </div>
+            <div class="col-lg-6 order-lg-2">
+              <div id='dance-scatter-chart'></div>
+            </div>
+        </div>
+          <!--Energia-->
+          <div class= "row align-content-center">
+              <div class="col-lg-6 order-lg-1">
+                  <div id='energy-chart'></div>
+              </div>
+              <div class="col-lg-6 order-lg-2">
+                  <div id='energy-scatter-chart'></div>
+              </div>
+          </div>
+          <!--Loudness-->
+          <div class= "row align-content-center">
+              <div class="col-lg-6 order-lg-1">
+                  <div id='loudness-chart'></div>
+              </div>
+              <div class="col-lg-6 order-lg-2">
+                  <div id='loudness-scatter-chart'></div>
+              </div>
+          </div>
+          <!--Acustica-->
+          <div class= "row align-content-center">
+              <div class="col-lg-6 order-lg-1">
+                  <div id='acousticness-chart'></div>
+              </div>
+              <div class="col-lg-6 order-lg-2">
+                  <div id='acousticness-scatter-chart'></div>
+              </div>
+          </div>
+          <!--Valence-->
+          <div class= "row align-content-center">
+              <div class="col-lg-6 order-lg-1">
+                  <div id='valence-chart'></div>
+              </div>
+              <div class="col-lg-6 order-lg-2">
+                  <div id='valence-scatter-chart'></div>
+              </div>
+          </div>
+      </div>
+    </section> <!-- Sessão Análise das Caracteristicas PT2-->
+
+    <!--Scripts-->
+    <script src="funcs/corr_plot.js"></script>
+    <script src="funcs/drawScatter_.js"></script>
+    <script src="funcs/rad.js"></script>
+    <script src="funcs/radar.js"></script>
+    <script type="text/javascript">
+
+        let promises = [
+            d3.csv("data/featuresbase_.csv"),
+            d3.csv("data/corr_data.csv")
+        ];
+        Promise.all(promises).then(ready);
+
+        //variáveis do corr-plot
+        var corr = [];
+        var tableValues = [];
+
+        var w = 400,
+            h = 400;
+
+        var scatterplot;
+        var nind;
+        var corXscale, corYscale, corRscale, corColScale;
+        var vars, nvars;
+        var marginCorr;
+        var pad;
+
+        //variáveis do corr-plot fim
+
+        function ready(what) {
+            // variáveis do scatter---------------------
+            data = what[0];
+            var heightSc = 200;
+            var widthSc =  400;
+
+            //var xyvalues = [];
+            var x = [];
+            var y = [];
+            var v = [];
+            var u = [];
+            var t = [];
+            var s = [];
+            let k = 100;
+
+            data.forEach(function(d){
+                d.pop = k;
+                k = k - 1;
+            });
+
+            data.forEach(function(d){
+                x.push(+d.danceability);
+                v.push(+d.energy);
+                u.push(+d.loudness);
+                t.push(+d.acousticness);
+                s.push(+d.valence); //parei aqui
+
+                y.push(+d.pop);
+            });
+
+            let scalexD = d3.scaleLinear().domain([0, d3.max(x)]).range([0, widthSc]);
+            let scaleyD = d3.scaleLinear().domain([0, d3.max(y)]).range([heightSc, 0]);
+
+            let scalexE = d3.scaleLinear().domain([0, d3.max(v)]).range([0, widthSc]);
+            let scaleyE = d3.scaleLinear().domain([0, d3.max(y)]).range([heightSc, 0]);
+
+            let scalexL = d3.scaleLinear().domain([d3.min(u), d3.max(u)]).range([0, widthSc]);
+            let scaleyL = d3.scaleLinear().domain([0, d3.max(y)]).range([heightSc, 0]);
+
+            let scalexA = d3.scaleLinear().domain([0, d3.max(t)]).range([0, widthSc]);
+            let scaleyA = d3.scaleLinear().domain([0, d3.max(y)]).range([heightSc, 0]);
+
+            let scalexV = d3.scaleLinear().domain([0, d3.max(s)]).range([0, widthSc]);
+            let scaleyV = d3.scaleLinear().domain([0, d3.max(y)]).range([heightSc, 0]);
+
+            let danceScatterChart = dc.scatterPlot("#dance-scatter-chart");
+            let energyScatterChart = dc.scatterPlot("#energy-scatter-chart");
+            let loudnessScatterChart = dc.scatterPlot("#loudness-scatter-chart");
+            let acousticnessScatterChart = dc.scatterPlot("#acousticness-scatter-chart");
+            let valenceScatterChart = dc.scatterPlot("#valence-scatter-chart");
+            //variáveis do scatter  fim-------------------------
+
+            //variáveis do hist --------------------------------------
+            let formatNumber = d3.format(".1f");
+
+            console.log(data[0][1]);
+
+            let dimensionValuesDanceability = [];
+            let dimensionValuesEnergy = [];
+            let dimensionValuesLoudness = [];
+            let dimensionValuesAcousticness = [];
+            let dimensionValuesValence = [];
+
+            data.forEach(function(d){
+                d.danceabilityf = formatNumber(d.danceability);
+                dimensionValuesDanceability.push(+d.danceability);
+
+                d.energyf = formatNumber(d.energy);
+                dimensionValuesEnergy.push(+d.energy);
+
+                d.loudnessf = Math.floor(+d.loudness);
+                dimensionValuesLoudness.push(+d.loudness);
+
+                d.acousticnessf = formatNumber(d.acousticness);
+                dimensionValuesAcousticness.push(+d.acousticness);
+
+                d.valencef = formatNumber(d.valence);
+                dimensionValuesValence.push(+d.valence);
+                //console.log(d);
+            });
+
+            var barchartDance = dc.barChart('#danceability-chart');
+            var maxOnScaleDance, minOnScaleDance;
+
+            var barchartEnergy = dc.barChart('#energy-chart');
+            var maxOnScaleEnergy, minOnScaleEnergy;
+
+            var barchartLoudness = dc.barChart('#loudness-chart');
+            var maxOnScaleLoudness, minOnScaleLoudness;
+
+            var barchartAcousticness = dc.barChart('#acousticness-chart');
+            var maxOnScaleAcousticness, minOnScaleAcousticness;
+
+            var barchartValence = dc.barChart('#valence-chart');
+            var maxOnScaleValence, minOnScaleValence;
+
+            maxOnScaleDance = d3.max(dimensionValuesDanceability);
+            minOnScaleDance = d3.min(dimensionValuesDanceability);
+
+            maxOnScaleEnergy = d3.max(dimensionValuesEnergy);
+            minOnScaleEnergy = d3.min(dimensionValuesEnergy);
+
+            maxOnScaleLoudness = d3.max(dimensionValuesLoudness);
+            minOnScaleLoudness = d3.min(dimensionValuesLoudness);
+
+            maxOnScaleAcousticness = d3.max(dimensionValuesValence);
+            minOnScaleAcousticness = d3.min(dimensionValuesValence);
+
+            maxOnScaleValence = d3.max(dimensionValuesValence);
+            minOnScaleValence = d3.min(dimensionValuesValence);
+            //variáveis do hist fim--------------------------------------
+
+
+            //variáveis do hist genero musical ---------------------------------------------
+            var barchartMGenre = dc.barChart('#musicgenre-chart');
+            //variáveis do hist genero musical fim ---------------------------------------------
+
+            //variáveis do sexo  ---------------------------------------------
+            var pieChartAGender = dc.pieChart('#artistgender-chart');
+            //variáveis do sexo fim---------------------------------------------
+
+            //variáveis do tipo  ---------------------------------------------
+            var pieChartBType = dc.pieChart("#bandtype-chart");
+            //variáveis do tipo fim---------------------------------------------
+
+
+            let facts = crossfilter(data);
+
+            // dimensões e grupos hist --------------------------------------
+
+            let danceDimension = facts.dimension(function(d){
+                return +d.danceabilityf;
+            });
+            let groupByDance = danceDimension.group();
+            let scaleD = d3.scaleLinear().domain([minOnScaleDance, maxOnScaleDance + 0.1]);
+
+            let energyDimension = facts.dimension(function(d){
+                return +d.energyf;
+            });
+            let groupByEnergy = energyDimension.group();
+            let scaleE = d3.scaleLinear().domain([minOnScaleEnergy, maxOnScaleEnergy + 0.15]);
+
+            let loudnessDimension = facts.dimension(function(d){
+                return d.loudnessf;
+            });
+            let groupByLoudness = loudnessDimension.group();
+            let scaleL = d3.scaleLinear().domain([minOnScaleLoudness, maxOnScaleLoudness ]);
+
+            let acousticnessDimension = facts.dimension(function(d){
+                return d.acousticnessf;
+            });
+            let groupByAcousticness = acousticnessDimension.group();
+            let scaleA = d3.scaleLinear().domain([minOnScaleAcousticness, maxOnScaleAcousticness ]);
+
+            let valenceDimension = facts.dimension(function(d){
+                return d.valencef;
+            });
+            let groupByValence = valenceDimension.group();
+            let scaleV = d3.scaleLinear().domain([minOnScaleValence, maxOnScaleValence ]);
+            // dimensões e grupos hist  fim --------------------------------------
+
+            //dimensões e grupos scatter ---------------------------------------------------
+            let danceScdimension = facts.dimension(function(d){
+                return [+d.danceability, +d.pop];
+            });
+            let danceScGroup = danceScdimension.group();
+
+            let energyScdimension = facts.dimension(function(d){
+                return [+d.energy, +d.pop];
+            });
+            let energyScGroup = energyScdimension.group();
+
+            let loudnessScdimension = facts.dimension(function(d){
+                return [+d.loudness, +d.pop];
+            });
+            let loudnessScGroup = loudnessScdimension.group();
+
+            let acousticnessScdimension = facts.dimension(function(d){
+                return [+d.acousticness, +d.pop];
+            });
+            let acousticnessScGroup = acousticnessScdimension.group();
+
+            let valenceScdimension = facts.dimension(function(d){
+                return [+d.valence, +d.pop];
+            });
+            let valenceScGroup = valenceScdimension.group();
+            //dimensões e grupos scatter fim ---------------------------------------------------
+
+            //grupo e dim do hist genero musical ---------------------------------------------
+            let  MGenreDimension = facts.dimension(function(d) {return d.Genre;});
+            let sumCategory = MGenreDimension.group();
+            //grupo e dim do hist genero musical fim ---------------------------------------------
+
+            //grupo e dim do sexo  ---------------------------------------------
+            let  AGenderDimension = facts.dimension(function(d) {return d.Gender;});
+            let sumCategoryG = AGenderDimension.group();
+            //grupo e dim do sexo fim---------------------------------------------
+
+            //grupo e dim do tipo  ---------------------------------------------
+            let BtypeDimension = facts.dimension(function(d) {return d.BandType;})
+            let sumCategoryB = BtypeDimension.group();
+            //grupo e dim do tipo fim---------------------------------------------
+
+            //gráficos hist ----------------------------------------------------------------
+            barchartDance.width(460).height(200).
+            dimension(danceDimension).
+            group(groupByDance).
+            x(scaleD).
+            yAxisLabel('Nº de músicas').
+            xAxisLabel('Danceability').
+            colors('#212121').
+            gap(7).
+            xUnits(function(){return 7;}).
+            elasticY(true);
+
+            barchartEnergy.width(460).height(200).
+            dimension(energyDimension).
+            group(groupByEnergy).
+            x(scaleE).
+            yAxisLabel('Nº de músicas').
+            xAxisLabel('Energy').
+            colors('#1db954').
+            gap(7).
+            xUnits(function(){return 7;}).
+            elasticY(true);
+
+            barchartLoudness.width(460).height(200).
+            dimension(loudnessDimension).
+            group(groupByLoudness).
+            x(scaleL).
+            yAxisLabel('Nº de músicas').
+            xAxisLabel('Loudness').
+            colors('#c1442e').
+            gap(15).
+            xUnits(function(){return 7;}).
+            elasticY(true);
+
+            barchartAcousticness.width(460).height(200).
+            dimension(acousticnessDimension).
+            group(groupByAcousticness).
+            x(scaleA).
+            yAxisLabel('Nº de músicas').
+            xAxisLabel('Acousticness').
+            colors('#6300b8').
+            gap(15).
+            xUnits(function(){return 7;}).
+            elasticY(true);
+
+            barchartValence.width(460).height(200).
+            dimension(valenceDimension).
+            group(groupByValence).
+            x(scaleV).
+            yAxisLabel('Nº de músicas').
+            xAxisLabel('Valence').
+            colors('#ff5000').
+            gap(15).
+            xUnits(function(){return 7;}).
+            elasticY(true);
+            //gráficos hist fim----------------------------------------------------------------
+
+            //gráficos scatter ---------------------------------------------------------------
+            danceScatterChart.width(widthSc).height(heightSc).
+            x(scalexD).
+            y(scaleyD).
+            yAxisLabel('Polularidade').
+            xAxisLabel('Danceability').
+            colors('#212121').
+            dimension(danceScdimension).
+            group(danceScGroup).
+            clipPadding(20);
+
+            energyScatterChart.width(widthSc).height(heightSc).
+            x(scalexE).
+            y(scaleyE).
+            yAxisLabel('Polularidade').
+            xAxisLabel('Energy').
+            colors('#1db954').
+            dimension(energyScdimension).
+            group(energyScGroup).
+            clipPadding(20);
+
+            loudnessScatterChart.width(widthSc).height(heightSc).
+            x(scalexL).
+            y(scaleyL).
+            yAxisLabel('Polularidade').
+            xAxisLabel('Loudness').
+            colors('#c1442e').
+            dimension(loudnessScdimension).
+            group(loudnessScGroup).
+            clipPadding(20);
+
+            acousticnessScatterChart.width(widthSc).height(heightSc).
+            x(scalexA).
+            y(scaleyA).
+            yAxisLabel('Polularidade').
+            xAxisLabel('Acousticness').
+            colors('#6300b8').
+            dimension(acousticnessScdimension).
+            group(acousticnessScGroup).
+            clipPadding(20);
+
+            valenceScatterChart.width(widthSc).height(heightSc).
+            x(scalexA).
+            y(scaleyA).
+            yAxisLabel('Polularidade').
+            xAxisLabel('Valence').
+            colors('#ff5000').
+            dimension(valenceScdimension).
+            group(valenceScGroup).
+            clipPadding(20);
+            //gráficos scatter fim -------------------------------------------------------------
+
+            //gráfico  genero musical -----------------
+            barchartMGenre.width(1200)
+                .height(500)
+                .x(d3.scaleBand())
+                .xUnits(dc.units.ordinal)
+                .brushOn(false)
+                .xAxisLabel(' ')
+                .yAxisLabel('Numero total de Artistas')
+                .colors('#1db954')
+                .dimension(MGenreDimension)
+                .barPadding(0.1)
+                .outerPadding(0.05)
+                .group(sumCategory)
+                .elasticY(true);
+            //gráfico  genero musical fim -----------------
+
+            //gráfico  sexo -----------------
+            pieChartAGender.width(700)
+                .height(400)
+                .slicesCap(4)
+                .innerRadius(100)
+                .externalRadiusPadding(50)
+                .externalLabels(30)
+                .dimension(AGenderDimension)
+                .group(sumCategoryG)
+                .ordinalColors(['#1db954', '#212121', '#535353', '#b3b3b3'])
+                .legend(dc.legend())
+                .on('pretransition', function(chart) {
+                    chart.selectAll('text.pie-slice').text(function(d) {
+                        return d.data.key + ' ' + dc.utils.printSingleValue((d.endAngle - d.startAngle) / (2*Math.PI) * 100) + '%';
+                    })
+                });
+            //gráfico  sexo fim -----------------
+
+            //gráfico  tipo -----------------
+            pieChartBType.width(700)
+                .height(400)
+                .slicesCap(4)
+                .innerRadius(100)
+                .externalRadiusPadding(50)
+                .externalLabels(30)
+                .dimension(BtypeDimension)
+                .group(sumCategoryB)
+                .ordinalColors(['#1db954', '#212121', '#535353', '#b3b3b3'])
+                .legend(dc.legend())
+                .on('pretransition', function(chart) {
+                    chart.selectAll('text.pie-slice').text(function(d) {
+                        return d.data.key + ' ' + dc.utils.printSingleValue((d.endAngle - d.startAngle) / (2*Math.PI) * 100) + '%';
+                    })
+                });
+            //gráfico  tipo fim -----------------
+            radar(data);
+            corrScatter(what);
+            dc.renderAll();
+        }
+        // });
+    </script>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-black">
+      <div class="container">
+
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>
