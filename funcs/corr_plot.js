@@ -10,7 +10,7 @@ function corrScatter(what){
 
     var svg = d3.select('svg')
         .attr("width", width + marginCorr.left + marginCorr.right)
-        .attr("height", h + marginCorr.top + marginCorr.bottom)
+        .attr("height", h + marginCorr.top + marginCorr.bottom )
         .append('g')
         .attr("transform", 'translate(' + marginCorr.left + ',' + marginCorr.top + ')')
         .attr("width", width)
@@ -20,17 +20,17 @@ function corrScatter(what){
     var corrplot = svg.append('g')
         .attr('id', 'corrplot');
 
-    scatterplot = svg.append('g')
+     scatterplot = svg.append('g')
         .attr('id', 'scatterplot')
         .attr('transform', 'translate(' + (w + pad) + ',0)');
 
-    corrplot.append('text')
-        .text('Matriz de Correlação')
-        .attr('class', 'plottitle')
-        .attr('x', w/2)
-        .attr('y', -marginCorr.top/2)
-        .attr('dominant-baseline', 'middle')
-        .attr('text-anchor', 'middle');
+    // corrplot.append('text')
+    //     .text('Matriz de Correlação')
+    //     .attr('class', 'plottitle')
+    //     .attr('x', w/2)
+    //     .attr('y', -marginCorr.top/2)
+    //     .attr('dominant-baseline', 'middle')
+    //     .attr('text-anchor', 'middle');
 
 
 
@@ -38,7 +38,7 @@ function corrScatter(what){
         .text('Scatter plot')
         .attr('class', 'plottitle')
         .attr('x', w/2)
-        .attr('y', -marginCorr.top/2)
+        .attr('y', (-marginCorr.top/2))
         .attr('dominant-baseline', 'middle')
         .attr('text-anchor', 'middle');
 
@@ -170,28 +170,34 @@ function corrScatter(what){
                 .attr('transform', 'translate(' + (-marginCorr.left*0.1) + ',' + h/2 + ')rotate(270)');
             //.attr('transform', 'translate(' + (-marginCorr.left*0.1) + ',' + corXscale(d.row) + ')rotate(270)');
 
+                corrplot.append('text')
+        .text('Correlation strenght: '+ d3.format('.2f')(d.value))
+        .attr('class', 'plottitle_')
+        .attr('x', w/2)
+        .attr('y', -marginCorr.top/2 )
+        .attr('dominant-baseline', 'middle')
+        .attr('text-anchor', 'middle');
 
-            corrplot.append('rect')
-                .attr('class', 'tooltip')
-                .attr('x', xPos + 10)
-                .attr('y', yPos - 30)
-                .attr('width', 40)
-                .attr('height', 20)
-                .attr('fill', 'rgba(200, 200, 200, 0.5)')
-                .attr('stroke', 'black')
-                .attr('data-toggle', 'tooltip');
+            // corrplot.append('rect')
+            //     .attr('class', 'tooltip')
+            //     .attr('x', xPos + 10)
+            //     .attr('y', yPos - 30)
+            //     .attr('width', 40)
+            //     .attr('height', 20)
+            //     .attr('fill', 'rgba(200, 200, 200, 0.5)')
+            //     .attr('stroke', 'black');
 
 
-            corrplot.append('text')
-                .attr('class', 'tooltip')
-                .attr('x', xPos + 30)
-                .attr('y', yPos - 15)
-                .attr('text-anchor', 'middle')
-                .attr('font-family', 'sans-serif')
-                .attr('font-size', '14px')
-                .attr('font-weight', 'bold')
-                .attr('fill', 'black')
-                .text(d3.format('.2f')(d.value));
+            // corrplot.append('text')
+            //     .attr('class', 'tooltip')
+            //     .attr('x', xPos + 30)
+            //     .attr('y', yPos - 15)
+            //     .attr('text-anchor', 'middle')
+            //     .attr('font-family', 'sans-serif')
+            //     .attr('font-size', '14px')
+            //     .attr('font-weight', 'bold')
+            //     .attr('fill', 'black')
+            //     .text(d3.format('.2f')(d.value));
         })
         .on('mouseout', function(d) {
             d3.select('#corrtext').remove();
@@ -200,7 +206,7 @@ function corrScatter(what){
                 .select('rect')
                 .attr('stroke', 'none');
             //Hide the tooltip
-            d3.selectAll('.tooltip').remove();
+            d3.selectAll('.plottitle_').remove();
         }).on('click', function(d) {
         drawScatter(d.col, d.row);
         radar(data);
