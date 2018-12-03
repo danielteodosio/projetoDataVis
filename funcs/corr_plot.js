@@ -171,7 +171,7 @@ function corrScatter(what){
             //.attr('transform', 'translate(' + (-marginCorr.left*0.1) + ',' + corXscale(d.row) + ')rotate(270)');
 
                 corrplot.append('text')
-        .text('Correlation strenght: '+ d3.format('.2f')(d.value))
+        .text('Correlation strength: '+ d3.format('.2f')(d.value))
         .attr('class', 'plottitle_')
         .attr('x', w/2)
         .attr('y', -marginCorr.top/2 )
